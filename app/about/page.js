@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import Lenis from '@studio-freight/lenis';
+import { useEffect } from "react";
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -50 },
@@ -12,6 +14,20 @@ const fadeInRight = {
 };
 
 export default function AboutCompany() {
+
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    // Cleanup function
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="relative mt-10 w-screen overflow-x-hidden py-12 bg-gradient-to-r from-red-500 to-blue-500">
       {/* Vertical center line */}

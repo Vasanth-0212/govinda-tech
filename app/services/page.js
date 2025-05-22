@@ -1,5 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
+import Lenis from '@studio-freight/lenis';
+import { useEffect } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -52,6 +54,20 @@ const systems = [
 ];
 
 export default function SystemsShowcase() {
+
+   useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    // Cleanup function
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="py-16 px-6 w-screen bg-gray-100">
       <h2 className="mt-5 text-4xl font-bold text-center mb-12 text-gray-800">Our Safety & Security Systems</h2>

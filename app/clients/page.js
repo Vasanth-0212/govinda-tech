@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import Lenis from '@studio-freight/lenis';
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -50 },
@@ -65,9 +66,8 @@ function AnimatedCard({ project, isEven }) {
       initial="hidden"
       variants={fade}
       transition={{ duration: 0.6 }}
-      className={`relative w-[40vw] p-6 mb-10 rounded-2xl border border-gray-400 shadow-xl bg-white text-gray-800 ${
-        isEven ? "ml-0 mr-auto" : "ml-auto mr-0"
-      }`}
+      className={`relative w-[40vw] p-6 mb-10 rounded-2xl border border-gray-400 shadow-xl bg-white text-gray-800 ${isEven ? "ml-0 mr-auto" : "ml-auto mr-0"
+        }`}
     >
       <h3 className="text-xl font-semibold mb-2">
         {project.no}. {project.name}
@@ -78,6 +78,18 @@ function AnimatedCard({ project, isEven }) {
 }
 
 export default function MajorProjects() {
+  useEffect(() => {
+    const lenis = new Lenis();
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    // Cleanup function
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
   return (
     <div className="relative max-w-6xl mx-auto px-6 py-20">
       <h2 className="text-4xl font-bold text-center mb-16 text-red-700">Our Clients</h2>
