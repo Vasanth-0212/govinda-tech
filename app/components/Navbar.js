@@ -37,7 +37,7 @@ export default function Navbar() {
         <nav
             className={`w-screen text-white shadow-md ${pathname === "/about" ? "bg-gradient-to-r from-red-500 to-blue-500" :
                 !scrolled && isGradientRoute
-                    ? "bg-gradient-to-r from-red-500 to-blue-500"
+                    ? "bg-transparent"
                     : "bg-red-400"
                 }`}
         >

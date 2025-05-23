@@ -9,6 +9,22 @@ import Lenis from '@studio-freight/lenis';
 
 export default function Home() {
 
+  const images = [
+    "/bg-image-1.png",
+    "/bg-image-2.png",
+    "/bg-image-3.png",
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 3000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  },[]);
+
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time) {
@@ -70,29 +86,45 @@ export default function Home() {
   return (
     <div className="w-full no-scrollbar">
       {/* Hero Section */}
-      <div id="home" className="min-h-screen w-full flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-red-500 to-blue-500 text-white p-6">
-        <div className="flex-1 flex justify-center mb-6 md:mb-0">
-          <Image
-            src="/logo.jpg"
-            alt="Logo Image"
-            width={300}
-            height={300}
-            className="rounded-xl shadow-lg"
-          />
-        </div>
+      <div id="home" className="relative min-h-screen w-full text-white overflow-hidden">
+        <Image
+          src={images[currentImage]}
+          alt="Background Image"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          className="z-0"
+        />
 
-        <div className="flex-1 text-center md:text-left space-y-4">
-          <h1 className="text-3xl md:text-5xl font-bold">
-            Fire & Security Solutions Built on Experience, Precision & Trust
-          </h1>
-          <p className="text-lg md:text-xl text-white/90">
-            With over 50 commissioned projects and 12+ years of expertise, Govinda Tech & Services delivers custom-engineered fire safety and security systems for commercial, residential, and industrial needs.
-          </p>
-          <button className="mt-4 px-4 py-1 text-lg bg-white text-red-500 font-medium rounded-full shadow-md hover:text-red-800 transition">
-            Get Started
-          </button>
+        {/* Optional overlay */}
+        <div className="absolute inset-0 bg-gray-900/20 z-10" />
+
+        {/* Content on top */}
+        <div className="relative z-20 flex flex-col md:flex-row items-center justify-center min-h-screen p-6">
+          <div className="flex-1 flex justify-center mb-6 md:mb-0">
+            <Image
+              src="/logo.jpg"
+              alt="Logo Image"
+              width={300}
+              height={300}
+              className="hidden rounded-xl shadow-lg"
+            />
+          </div>
+
+          <div className="flex-1 text-center md:text-left space-y-4">
+            <h1 className="text-3xl md:text-5xl font-bold text-white">
+              Fire & Security Solutions Built on Experience, Precision & Trust
+            </h1>
+            <p className="text-lg md:text-xl text-white/90">
+              With over 50 commissioned projects and 12+ years of expertise, Govinda Tech & Services delivers custom-engineered fire safety and security systems for commercial, residential, and industrial needs.
+            </p>
+            <button className="mt-4 px-4 py-1 text-lg bg-white text-red-500 font-medium rounded-full shadow-md hover:text-red-800 transition">
+              Get Started
+            </button>
+          </div>
         </div>
       </div>
+
 
       {/* About Section with Animations */}
       <div id="about" className="h-screen w-full bg-gray-100 flex flex-col md:flex-row items-center justify-between px-6 py-12 gap-8">
