@@ -36,14 +36,14 @@ export default function Navbar() {
     return (
         <nav
             className={`w-screen text-white shadow-md ${pathname === "/about" ? "bg-gradient-to-r from-red-500 to-blue-500" :
-                    !scrolled && isGradientRoute
-                        ? "bg-gradient-to-r from-red-500 to-blue-500"
-                        : "bg-red-400"
+                !scrolled && isGradientRoute
+                    ? "bg-gradient-to-r from-red-500 to-blue-500"
+                    : "bg-red-400"
                 }`}
         >
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
-                    <div className={`text-2xl font-bold`} >Govinda Tech & Services</div>
+                    <div className={`text-3xl font-nova-round font-bold`} >GOVINDA TECH & SERVICES</div>
 
                     <div className="flex space-x-8">
                         <p
@@ -83,13 +83,15 @@ export default function Navbar() {
                             Clients
                         </p>
 
-                        <a
-                            href="#contact"
-                            onClick={(e) => handleClick(e, "contact")}
-                            className="text-white font-serif text-lg cursor-pointer"
-                        >
-                            Contact Us
-                        </a>
+                        {pathname === "/" && (
+                            <a
+                                href="#contact"
+                                onClick={(e) => handleClick(e, "contact")}
+                                className="text-white font-serif text-lg cursor-pointer"
+                            >
+                                Contact Us
+                            </a>
+                        )}
                     </div>
                 </div>
             </div>
