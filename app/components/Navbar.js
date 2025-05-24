@@ -30,20 +30,20 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const isGradientRoute = pathname === "/" || pathname === "/about";
+    const isHome = pathname === "/";
 
 
     return (
         <nav
-            className={`w-screen text-white shadow-md ${pathname === "/about" ? "bg-gradient-to-r from-red-500 to-blue-500" :
-                !scrolled && isGradientRoute
-                    ? "bg-transparent"
-                    : "bg-red-400"
+            className={`w-screen text-white shadow-md ${!scrolled && isHome
+                ? "bg-transparent"
+                : !isHome ? "bg-gradient-to-r from-red-100 to-blue-100"
+                    : "bg-blue-400"
                 }`}
         >
             <div className="mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
-                    <div className={`text-3xl font-nova-round font-bold`} >GOVINDA TECH & SERVICES</div>
+                    <div className={`text-3xl font-nova-round font-bold ${!isHome && "text-gray-600"} `} >GOVINDA TECH & SERVICES</div>
 
                     <div className="flex space-x-8">
                         <p
@@ -51,7 +51,7 @@ export default function Navbar() {
                             onClick={() => {
                                 router.push('/')
                             }}
-                            className="text-white font-serif text-lg cursor-pointer"
+                            className={`font-serif text-lg cursor-pointer ${!isHome ? "text-gray-600" : "text-white"}`}
                         >
                             Home
                         </p>
@@ -60,7 +60,7 @@ export default function Navbar() {
                             onClick={() => {
                                 router.push('/about')
                             }}
-                            className="text-white font-serif text-lg cursor-pointer"
+                            className={`font-serif text-lg cursor-pointer ${!isHome ? "text-gray-600" : "text-white"}`}
                         >
                             About Us
                         </p>
@@ -69,7 +69,7 @@ export default function Navbar() {
                             onClick={() => {
                                 router.push('/services')
                             }}
-                            className="text-white font-serif text-lg cursor-pointer"
+                            className={`font-serif text-lg cursor-pointer ${!isHome ? "text-gray-600" : "text-white"}`}
                         >
                             Services
                         </p>
@@ -78,7 +78,7 @@ export default function Navbar() {
                             onClick={() => {
                                 router.push('/clients')
                             }}
-                            className="text-white font-serif text-lg cursor-pointer"
+                            className={`font-serif text-lg cursor-pointer ${!isHome ? "text-gray-600" : "text-white"}`}
                         >
                             Clients
                         </p>
